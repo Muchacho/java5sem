@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+</head>
+<body>
+<!--<form action="/logout" method="post">-->
+<!--    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>-->
+<!--    <input type="submit" value="Sign Out"/>-->
+<!--</form>-->
+<!--<p>hello</p>-->
+<!--<a href="http://localhost:8081/grade">start</a>-->
+<form action="/logout" method="post">
+    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+    <input type="submit" value="Sign Out"/>
+</form>
+<div>
+    <form action="http://localhost:8081/getGrades" method="get">
+        <!--            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>-->
+        <input type="submit" value="Grades"/>
+    </form>
+</div>
+<div>
+    <form action="http://localhost:8081/getUsers" method="get">
+        <!--            <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>-->
+        <input type="submit" value="users"/>
+    </form>
+</div>
+<div>
+    <form method="POST" action="http://localhost:8081/grade">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+        <input type="text" name="Subject" placeholder="Subject"/>
+        <input type="number" name="Student" placeholder="Student"/>
+        <input type="number" name="Grade" placeholder="Grade"/>
+        <input type="text" name="Comment" placeholder="Comment"/>
+        <button type="submit">send</button>
+    </form>
+</div>
+<h1>Grade list</h1>
+{{#GradeList}}
+    <div>
+        <b>{{id}}</b>
+        <b>{{subject}}</b>
+        <b>{{student}}</b>
+        <b>{{grade}}</b>
+        <b>{{comment}}</b>
+    </div>
+{{/GradeList}}
+<div>
+    <form method="post" action="http://localhost:8081/findSubject">
+        <input type="text" name="subName" placeholder="Subject"/>
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+        <button type="submit">find</button>
+    </form>
+</div>
+<div>
+    <h1>users</h1>
+    {{#users}}
+        <div>
+            <b>{{id}}</b>
+            <b>{{name}}</b>
+            <b>{{course}}</b>
+            <b>{{role}}</b>
+        </div>
+    {{/users}}
+</div>
+</body>
+</html>
