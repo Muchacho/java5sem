@@ -20,6 +20,9 @@
       <li class="nav-item">
         <a class="nav-link" href="/getUsers">Students</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/email">Send mail</a>
+      </li>
     </ul>
 <#--    <div class="navbar-text mr-3">${name}</div>-->
       <@logout/>
