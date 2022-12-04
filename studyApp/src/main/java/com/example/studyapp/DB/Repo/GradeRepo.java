@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface GradeRepo extends CrudRepository<GradeUntity, Integer> {
     List<GradeUntity> findBySubject(String Subject);
+    List<GradeUntity> findByStudent(Integer Id);
 }

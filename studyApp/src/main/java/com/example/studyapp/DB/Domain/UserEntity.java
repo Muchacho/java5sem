@@ -89,4 +89,8 @@ public class UserEntity {
     public void setRole(Set<Role> role) {
         this.role = role;
     }
+
+    public boolean isAdmin(){
+        return role.contains(Role.ADMIN);
+    }
 }
