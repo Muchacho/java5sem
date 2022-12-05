@@ -1,5 +1,8 @@
 package com.example.studyapp.DB.Domain;
+import com.example.studyapp.Validator.PasswordConstrain;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 @Entity
 public class UserEntity {
@@ -8,7 +11,9 @@ public class UserEntity {
     private Integer id;
     private String name;
     private String course;
+    @NotBlank(message = "Login can not be empty")
     private String login;
+    @PasswordConstrain
     private String password;
     private String salt;
     private Boolean active;

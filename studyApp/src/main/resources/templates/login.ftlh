@@ -1,5 +1,10 @@
 <#import "parts/page.ftlh" as c>
 <@c.page>
+    <#if Session?? && Session.SPRING_SECURITY_LAST_EXCEPTION??>
+        <h5>
+            ${Session.SPRING_SECURITY_LAST_EXCEPTION.message}
+        </h5>
+    </#if>
 <form action="/login" method="post">
     <div class="form-group">
         <label> Login: <input type="text" name="username"  class="form-control"/> </label>

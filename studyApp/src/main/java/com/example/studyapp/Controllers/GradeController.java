@@ -6,8 +6,11 @@ import com.example.studyapp.DB.Repo.GradeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -32,17 +35,21 @@ public class GradeController {
     }
 
     @PostMapping("/addGrade")
-    public String addGrade(  @RequestParam String Subject,
-                             @RequestParam Integer Student,
-                             @RequestParam Integer Grade,
-                             @RequestParam String Comment,
-                             Map<String,Object> model
+    public String addGrade(  @Valid GradeUntity grade,
+                             BindingResult bindingResult,
+                             Model model
     ) {
-        System.out.printf(Subject, Student, Grade, Comment);
-        GradeUntity GradeItem = new GradeUntity(Subject, Comment, Grade, Student);
-        gradeRepo.save(GradeItem);
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = ControllerUtils.getErrors(bindingResult);
+            System.out.println(errors);
+            model.mergeAttributes(errors);
+            Iterable<GradeUntity> list = gradeRepo.findAll();
+            model.addAttribute("GradeList", list);
+            return "grades";
+        }
+        gradeRepo.save(grade);
         Iterable<GradeUntity> list = gradeRepo.findAll();
-        model.put("GradeList", list);
+        model.addAttribute("GradeList", list);
         return "grades";
     }
 }

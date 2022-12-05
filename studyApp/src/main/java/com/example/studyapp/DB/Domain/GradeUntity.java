@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Entity
 public class GradeUntity {
@@ -14,7 +17,8 @@ public class GradeUntity {
     private String subject;
 
     private String comment;
-
+    @Min(value = 1,message = "invalid grade")
+    @Max(value = 10, message = "invalid grade")
     private Integer grade;
 
     private Integer student;

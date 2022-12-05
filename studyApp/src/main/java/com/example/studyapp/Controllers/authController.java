@@ -5,10 +5,13 @@ import com.example.studyapp.DB.Domain.UserEntity;
 import com.example.studyapp.DB.Repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.Collections;
 import java.util.Map;
 
@@ -23,21 +26,26 @@ public class authController {
 
     @PostMapping("/regist")
     public String postRegistr(
-            @RequestParam String username,
-            @RequestParam String course,
-            @RequestParam String login,
-            @RequestParam String password,
-            Map<String, Object> model) {
+            @Valid UserEntity user,
+            BindingResult bindingResult,
+            Model model) {
 
-        UserEntity User = users.findByLogin(login);
-        if(User != null){
-            model.put("message", "user exist");
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = ControllerUtils.getErrors(bindingResult);
+            System.out.println(errors);
+            model.mergeAttributes(errors);
+
             return "regist";
         }
-        UserEntity newUser = new UserEntity(username, course, login, password);
-        newUser.setActive(true);
-        newUser.setRole(Collections.singleton(Role.USER));
-        users.save(newUser);
+        UserEntity User = users.findByLogin(user.getLogin());
+        if(User != null){
+            model.addAttribute("message", "user exist");
+            return "regist";
+        }
+//        UserEntity newUser = new UserEntity(username, course, login, password);
+        user.setActive(true);
+        user.setRole(Collections.singleton(Role.USER));
+        users.save(user);
 
         return "redirect:/login";
     }

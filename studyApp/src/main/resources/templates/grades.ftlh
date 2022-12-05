@@ -1,6 +1,9 @@
 <#import "parts/page.ftlh" as c>
 
 <@c.page>
+    <#if gradeError??>
+        <h5>${gradeError}</h5>
+    </#if>
     <form action="http://localhost:8081/user/findGrades" method="post" class="form-inline mb-3">
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <input class="form-control" type="text" name="subject" placeholder="Subject"/>
@@ -17,7 +20,7 @@
             <label> Student: <input type="text" name="Student"  class="form-control"/> </label>
         </div>
         <div class="form-group">
-            <label> Grade: <input type="text" name="Grade"  class="form-control"/> </label>
+            <label> Grade: <input type="number" name="Grade"  class="form-control"/> </label>
         </div>
         <div class="form-group">
             <label> Comment: <input type="text" name="Comment"  class="form-control"/> </label>
@@ -39,6 +42,8 @@
                 <th>${grade.grade}</th>
                 <th>${grade.comment}</th>
             </tr>
+            <#else >
+
         </#list>
     </table>
 </@c.page>
