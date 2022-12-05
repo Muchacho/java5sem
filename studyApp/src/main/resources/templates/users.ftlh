@@ -6,6 +6,11 @@
         <input class="form-control" type="number" name="id" placeholder="Student id"/>
         <button type="submit" class="btn btn-primary ml-2">find</button>
     </form>
+    <#if error??>
+        <div class="alert alert-danger" role="alert">
+            ${error}
+        </div>
+    </#if>
     <table class="table mt-3">
         <tr>
             <th>Subject</th>

@@ -13,10 +13,19 @@
         Add grade
     </a>
     <form method="POST" action="http://localhost:8081/user/addGrade" class="collapse" id="collapseExample">
-        <div class="form-group">
-            <label> Subject: <input type="text" name="Subject"  class="form-control"/> </label>
+        <div class="form-check form-check-inline mt-3">
+            <input class="form-check-input" type="checkbox" name="Subject" id="inlineCheckbox1" value="Physics">
+            <label class="form-check-label" for="inlineCheckbox1">Physics</label>
         </div>
-        <div class="form-group">
+        <div class="form-check form-check-inline mt-3 ml-2">
+            <input class="form-check-input" type="checkbox" name="Subject" id="inlineCheckbox2" value="Math">
+            <label class="form-check-label" for="inlineCheckbox2">Math</label>
+        </div>
+        <div class="form-check form-check-inline mt-3 ml-2">
+            <input class="form-check-input" type="checkbox" name="Subject" id="inlineCheckbox3" value="PE">
+            <label class="form-check-label" for="inlineCheckbox2">PE</label>
+        </div>
+        <div class="form-group mt-3">
             <label> Student: <input type="text" name="Student"  class="form-control"/> </label>
         </div>
         <div class="form-group">
