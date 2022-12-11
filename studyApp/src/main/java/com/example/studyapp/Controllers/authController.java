@@ -42,7 +42,6 @@ public class authController {
             model.addAttribute("message", "user exist");
             return "regist";
         }
-//        UserEntity newUser = new UserEntity(username, course, login, password);
         user.setActive(true);
         user.setRole(Collections.singleton(Role.USER));
         users.save(user);

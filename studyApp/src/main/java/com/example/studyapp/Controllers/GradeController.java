@@ -22,6 +22,7 @@ public class GradeController {
     @Autowired
     private GradeRepo gradeRepo;
 
+
     @GetMapping("/getGrades")
     public String getGrades(Map<String, Object> model){
         model.put("GradeList", gradeRepo.findAll());
